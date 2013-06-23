@@ -1,0 +1,6 @@
+django>=1.4,<1.5
+south>=0.7.4
+mysql-python
+
+fabric==1.6.1
+django-fab-deploy>=0.7.2
