@@ -4,3 +4,7 @@ mysql-python
 
 fabric==1.6.1
 django-fab-deploy>=0.7.2
+
+pil==1.1.7
+django-tagging==0.3.1
+python-dateutil==1.5

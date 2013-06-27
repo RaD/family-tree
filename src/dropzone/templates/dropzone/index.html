@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load i18n staticfiles %}
+{% load url from future %}
+
+{% block page_title %}{% trans "DropZone" %}{% endblock %}
+
+{% block extra_css %}{{ block.super }}
+    <link rel="stylesheet" href="{% static "dropzone/css/basic.css" %}" />
+    <link rel="stylesheet" href="{% static "dropzone/css/dropzone.css" %}" />
+{% endblock %}
+
+{% block extra_js %}{{ block.super }}
+    <script src="{% static "dropzone/js/jquery-1.7.2.min.js" %}"></script>
+    <script src="{% static "dropzone/js/jquery.cookie.js" %}"></script>
+    <script src="{% static "dropzone/js/dropzone.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+<div id="dropzone">
+    <form action="{% url 'dropzone:upload' %}"
+        class="dropzone"
+        id="form-dropzone"></form>
+</div>
+
+<script>
+Dropzone.options.formDropzone = {
+    paramName: "resource",
+    maxFilesize: 10,
+    init: function() {
+        this.on('sending', function(file, xhr, formData) {
+            var csrftoken = $.cookie('csrftoken');
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        });
+    }
+};
+</script>
+{% endblock %}
