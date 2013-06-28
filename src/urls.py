@@ -12,6 +12,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^dropzone/', include('src.dropzone.urls', namespace='dropzone')),
     url(r'^galleria/', include('src.galleria.urls', namespace='galleria')),
+    url(r'^', include('src.frontend.urls', namespace='frontend')),
 )
 
 urlpatterns += staticfiles_urlpatterns()

@@ -7,13 +7,15 @@
     <meta charset="utf-8" />
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>{% block page_title %}{% endblock %}</title>
 
     <meta name="description" value="{% block meta_desc %}{% endblock %}" />
     <meta name="keywords" value="{% block meta_keys %}{% endblock %}" />
 
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}" />
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}" />
     <link rel="stylesheet" href="{% static "css/style.css" %}" />
     {% block extra_css %}{% endblock %}
 
@@ -24,5 +26,8 @@
 </head>
 <body>
 {% block body %}{% endblock %}
+
+<!-- Placed at the end of the document so the pages load faster -->
+{% block extra_js_bottom %}{% endblock %}
 </body>
 </html>
