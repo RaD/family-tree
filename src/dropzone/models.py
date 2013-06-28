@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from base64 import b64encode
 from dateutil import parser
 from hashlib import sha1
-from base64 import b64encode
+from os.path import splitext
 
 from django.db import models
-from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from . import get_exif
@@ -16,15 +16,17 @@ S10K = 10 * 1024
 def upload_photos_dir(instance, filename):
     u"""Возвращает путь для загружаемого файла, учитывая данные exif."""
     f = instance.resource.file
+    f.seek(0)
     first10k = f.read(S10K if f.size > S10K else f.size)
     filehash = sha1(b64encode(first10k)).hexdigest()
+    ext = splitext(filename)[1]
     exif = get_exif(f)
     ts = exif.get('DateTimeOriginal')
     if ts:
         ts = parser.parse(ts)
-        return u'dropzone/photos/%s/%s/%s/%s' % (ts.year, ts.month, ts.day, filehash)
+        return u'dropzone/photos/%s/%s/%s/%s%s' % (ts.year, ts.month, ts.day, filehash, ext)
     else:
-        return u'dropzone/photos/no-exif/%s' % (filehash)
+        return u'dropzone/photos/no-exif/%s%s' % (filehash, ext)
 
 
 class Photo(models.Model):
