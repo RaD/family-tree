@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'south',
 
     'src.dropzone',
+    'src.galleria',
     'src.relatives',
 )
 
