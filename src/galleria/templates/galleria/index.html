@@ -14,24 +14,31 @@
     <script src="{% static "galleria/js/galleria-1.2.9.min.js" %}"></script>
 {% endblock %}
 
-{% block body %}
-<div id="gallery">
-    <div id="galleria">
-    {% for obj in object_list %}
-        <img src="{{ obj.resource.url }}"/>
-    {% endfor %}
-    </div>
-</div>
-
-{% if not object_lists %}
-{% url 'dropzone:index' as dropzone %}
-{% blocktrans %}
-<div id="empty">Use <a href="{{ dropzone }}">Dropzone</a> to populate storage!</div>
-{% endblocktrans %}
-{% endif %}
-
+{% block extra_js_bottom %}{{ block.super }}
 <script>
     Galleria.loadTheme('{% static "galleria/themes/classic/galleria.classic.min.js" %}');
     Galleria.run('#galleria');
 </script>
+{% endblock %}
+
+{% block body %}
+    {% include "frontend/includes/navbar.html" %}
+
+<div class="container">
+    <div class="bg-image">
+        <img src="http://twitter.github.io/bootstrap/assets/img/examples/slide-03.jpg" alt="">
+        <div class="spacer120"></div>
+    </div>
+</div>
+
+<div class="container marketing">
+    <div id="gallery">
+        <div id="galleria">
+        {% for obj in object_list %}
+            <img src="{{ obj.resource.url }}"/>
+        {% endfor %}
+        </div>
+    </div>
+    {% include "frontend/includes/footer.html" %}
+</div><!-- /.container -->
 {% endblock %}

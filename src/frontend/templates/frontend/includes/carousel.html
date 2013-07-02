@@ -1,0 +1,44 @@
+{% load i18n %}
+{% load url from future %}
+<div id="myCarousel" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="http://twitter.github.io/bootstrap/assets/img/examples/slide-01.jpg" alt="">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>{% trans "Upload your photos" %}</h1>
+          <p class="lead">
+            {%blocktrans %}You may easily upload many photos at once with DropZone page.{% endblocktrans %}
+          </p>
+          <a class="btn btn-large btn-primary" href="{% url 'dropzone:index' %}">{% trans "Visit a DropZone" %}</a>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="http://twitter.github.io/bootstrap/assets/img/examples/slide-02.jpg" alt="">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>{% trans "Register your relatives" %}</h1>
+          <p class="lead">
+            {% blocktrans %}Keep the memory about your relatives and your origin. Assign photos to known people.{% endblocktrans %}
+          </p>
+          <a class="btn btn-large btn-primary" href="#">{% trans "Register them" %}</a>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="http://twitter.github.io/bootstrap/assets/img/examples/slide-03.jpg" alt="">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>{% trans "Look at relatives" %}</h1>
+          <p class="lead">
+            {% blocktrans %}The full featured gallery service is for you.{% endblocktrans %}
+          </p>
+          <a class="btn btn-large btn-primary" href="{% url 'galleria:index' %}">{% trans "Go to Gallery" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->

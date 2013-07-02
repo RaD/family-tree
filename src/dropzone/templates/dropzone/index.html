@@ -11,28 +11,43 @@
 {% endblock %}
 
 {% block extra_js %}{{ block.super }}
-    <script src="{% static "dropzone/js/jquery-1.7.2.min.js" %}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <script src="{% static "dropzone/js/jquery.cookie.js" %}"></script>
     <script src="{% static "dropzone/js/dropzone.js" %}"></script>
 {% endblock %}
 
+{% block extra_js_bottom %}{{ block.super }}
+    <script>
+    Dropzone.options.formDropzone = {
+        paramName: "resource",
+        maxFilesize: 10,
+        init: function() {
+            this.on('sending', function(file, xhr, formData) {
+                var csrftoken = $.cookie('csrftoken');
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            });
+        }
+    };
+    </script>
+{% endblock %}
+
 {% block body %}
-<div id="dropzone">
-    <form action="{% url 'dropzone:upload' %}"
-        class="dropzone"
-        id="form-dropzone"></form>
+    {% include "frontend/includes/navbar.html" %}
+
+<div class="container">
+    <div class="bg-image">
+        <img src="http://twitter.github.io/bootstrap/assets/img/examples/slide-01.jpg" alt="">
+        <div class="spacer120"></div>
+    </div>
 </div>
 
-<script>
-Dropzone.options.formDropzone = {
-    paramName: "resource",
-    maxFilesize: 10,
-    init: function() {
-        this.on('sending', function(file, xhr, formData) {
-            var csrftoken = $.cookie('csrftoken');
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        });
-    }
-};
-</script>
+<div class="container marketing">
+    <div id="dropzone">
+        <form action="{% url 'dropzone:upload' %}"
+            class="dropzone"
+            id="form-dropzone"></form>
+    </div>
+
+    {% include "frontend/includes/footer.html" %}
+</div><!-- /.container -->
 {% endblock %}
