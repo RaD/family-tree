@@ -37,14 +37,16 @@
     </div>
 
     <div class="row">
-        <div class="span3">
-            <form class="form-signin">
+        <div class="offset1 span4">
+            <form class="form-signin" method="post" action=".">{% csrf_token %}
                 <h3 class="form-signin-heading">Sign in</h3>
-                <input type="text" class="input-block-level" placeholder="Email address">
-                <input type="password" class="input-block-level" placeholder="Password">
+                <input type="text" name="username" class="input-block-level" placeholder="Email address">
+                <input type="password" name="password" class="input-block-level" placeholder="Password">
+                {% comment %}
                 <label class="checkbox">
                     <input type="checkbox" value="remember-me"> Remember me
                 </label>
+                {% endcomment %}
                 <button class="btn btn-large btn-primary" type="submit">Sign in</button>
             </form>
         </div>

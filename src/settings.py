@@ -124,11 +124,19 @@ INSTALLED_APPS = (
 
     'south',
 
+    'src.accounts',
     'src.dropzone',
     'src.frontend',
     'src.galleria',
     'src.relatives',
 )
+
+CUSTOM_USER_MODEL = 'accounts.Profile'
+AUTHENTICATION_BACKENDS = (
+    'src.accounts.auth_backend.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

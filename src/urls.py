@@ -4,11 +4,13 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.views import login
 
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
+    url(r'^accounts/login/$', login, {'template_name': 'frontend/login.html'}),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^dropzone/', include('src.dropzone.urls', namespace='dropzone')),
     url(r'^galleria/', include('src.galleria.urls', namespace='galleria')),
